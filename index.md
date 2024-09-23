@@ -2,11 +2,11 @@
 
 ## Demos
 - [Square Moving Around Screen](Square-Moving)
-- [Image Demo](Image-Demo)
+- [Image Demo With Sonic](Image-Demo)
 
 
 ## Projects
--[Interactive Scene P2](Interactive-Scene)
+-[Interactive Scene](Interactive-Scene)
 
 
 
