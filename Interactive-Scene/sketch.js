@@ -1,4 +1,4 @@
-// Interactive Scene
+// Interactive Scene PIP BOY
 // Amy Zhang
 // Date
 //
@@ -11,7 +11,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  circle(mouseX, mouseY, 30);
+  background(0);
 }
+
 
