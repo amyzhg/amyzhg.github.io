@@ -5,12 +5,15 @@
 // GOAL: make a 'traffic light' simulator. For now, just have the light
 // changing according to time. You may want to investigate the millis()
 // function at https://p5js.org/reference/#/p5/millis
-let waitTime = 2000;
-let waitTimeY = 200;
-let isYellow = false;
-let isRed = true;
-let isGreen = false;
-let lastTimeSwitched = 0;
+
+// use alt + z of code is long
+
+let lightState = "green";
+let lastSwitchedTime = 0;
+
+const GREEN_LIGHT_DURATION = 3000;
+const YELLOW_LIGHT_DURATION  = 700;
+const RED_LIGHT_DURATION = 3500;
 
 function setup() {
   createCanvas(600, 600);
@@ -19,27 +22,39 @@ function setup() {
 function draw() {
   background(255);
   drawOutlineOfLights();
+  changeStateIfNeeded();
+  displayCorrectLight();
+}
 
-  // Yellow Light
-  if (millis() > lastTimeSwitched + waitTime) {
-    isGreen = !isGreen;
-    isYellow = true;
+function changeStateIfNeeded() {
+  if (lightState === "green" && millis() > lastSwitchedTime + GREEN_LIGHT_DURATION) {
+    lightState = "yellow";
+    lastSwitchedTime = millis();
   }
-  if (isYellow) {
-    fill("yellow");
-    ellipse(width/2, height/2 - 65, 50, 50); //top
-    fill("yellow");
-    ellipse(width/2, height/2, 50, 50); //middle
-    fill("yellow");
+  else if (lightState === "yellow" && millis() > lastSwitchedTime + YELLOW_LIGHT_DURATION) {
+    lightState = "red";
+    lastSwitchedTime = millis();
+  }
+  else if (lightState === "red" && millis() > lastSwitchedTime + RED_LIGHT_DURATION) {
+    lightState = "green";
+    lastSwitchedTime = millis();
+  }
+}
+
+
+function displayCorrectLight() {
+  if (lightState === "green") {
+    fill("green");
     ellipse(width/2, height/2 + 65, 50, 50); //bottom
   }
-  else {
-    fill("green");
-    ellipse(width/2, height/2 - 65, 50, 50); //top
-    fill("green");
+  else if (lightState === "yellow") {
+    fill("yellow");
     ellipse(width/2, height/2, 50, 50); //middle
-    fill("green");
-    ellipse(width/2, height/2 + 65, 50, 50); //bottom
+  }
+  else if (lightState === "red") {
+    fill("red");
+    ellipse(width/2, height/2 - 65, 50, 50); //top
+
   }
 }
 
@@ -50,5 +65,9 @@ function drawOutlineOfLights() {
   rect(width/2, height/2, 75, 200, 10);
 
   //lights
-
+  fill(255);
+  ellipse(width/2, height/2 - 65, 50, 50); //top
+  ellipse(width/2, height/2, 50, 50); //middle
+  ellipse(width/2, height/2 + 65, 50, 50); //bottom
 }
+
