@@ -5,11 +5,13 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let vaultboy;
+let player;
+let car_red;
+let car_black;
+let car_blue;
+let backgroundIMG;
 
-function preload(){
-  vaultboy = loadImage("vaultboy.gif");
-}
+function
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -17,11 +19,12 @@ function setup() {
 
 function draw() {
   background(0);
-  image(vaultboy, 200, 300);
 }
-
 
 
 // switch tabs for arrow keys 
 // use time clock
 // 
+
+
+//https://editor.p5js.org/reajmorais/sketches/zdK2iVkD-
