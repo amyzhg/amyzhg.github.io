@@ -22,7 +22,7 @@ let playerMoveY = 3;
 let playerMoveX = 3;
 
 let carX = [900, 900, 900];
-let carY = [45, 210, 138];
+let carY = [18, 210, 138];
 let carSpeedX;
 
 function drawCar() {
@@ -63,14 +63,14 @@ function move_player() {
   if (keyIsDown(UP_ARROW)) {
     playerY -=playerMoveY;
   }
-    if (keyIsDown(DOWN_ARROW)) {
+  if (keyIsDown(DOWN_ARROW)) {
     playerY += playerMoveY;
   }
   if (keyIsDown(RIGHT_ARROW)) {
-  playerX +=playerMoveX;
+    playerX +=playerMoveX;
   }
-    if (keyIsDown(LEFT_ARROW)) {
-      playerX -= playerMoveX;
+  if (keyIsDown(LEFT_ARROW)) {
+    playerX -= playerMoveX;
   }
 }
 
