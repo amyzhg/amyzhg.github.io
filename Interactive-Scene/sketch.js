@@ -6,6 +6,8 @@
 // - describe what you did to take this project "above and beyond"
 // - yummy yummy in my tummy kfc
 
+// ADD ANOTHER CAR AND ADD KFC DEATH AND MAYBE DEATH SOUND
+
 let player;
 let car_red;
 let car_black;
