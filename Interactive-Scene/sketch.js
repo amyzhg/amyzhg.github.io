@@ -61,7 +61,7 @@ function preload() {
 }
 
 function draw_player() {
-  image(player, playerX, playerY, sizeX, sizeY);
+  image(player, playerX, playerY, 50, 50);
 }
 
 function move_player() {
