@@ -7,11 +7,14 @@
 // - yummy yummy in my tummy kfc
 
 // ADD ANOTHER CAR AND ADD KFC DEATH AND MAYBE DEATH SOUND
+// intro is fast and furious but its all chicken instead of head
+// cornol sanders chases him around green spots only
 
 let player;
 let car_red;
 let car_black;
 let car_blue;
+let car_2;
 let backgroundIMG;
 
 let sizeX = 100;
@@ -21,14 +24,15 @@ let playerY =350;
 let playerMoveY = 3;
 let playerMoveX = 3;
 
-let carX = [900, 900, 900];
-let carY = [18, 210, 138];
+let carX = [900, 900, 900, 900];
+let carY = [2, 210, 138, 67];
 let carSpeedX;
 
 function drawCar() {
   image(car_black, carX[0], carY[0], sizeX, sizeY); // Black Car
   image(car_red, carX[1], carY[1], sizeX, sizeY); // Red Car
   image(car_blue, carX[2], carY[2], sizeX, sizeY); // Blue Car
+  image(car_2, carX[3], carY[3], sizeX, sizeY); // vroom Car
 }
 
 function moveCar() {
@@ -39,7 +43,7 @@ function moveCar() {
 
 function loopCar() {
   for (let i = 0; i < carX.length; i++) {  // Fixed loop condition
-    if (carX[i] < -50) {  // When car goes off-screen
+    if (carX[i] < -65) {  // When car goes off-screen
       carX[i] = width + random(100, 300);  // Reset position off screen
       carSpeedX[i] = random(1.8, 4.0);     // Randomize new speed
     }
@@ -53,6 +57,7 @@ function preload() {
   car_black = loadImage("car-black.png");
   car_blue = loadImage("car-blue.png");
   car_red = loadImage("car-red.png");
+  car_2 = loadImage("car-2.png");
 }
 
 function draw_player() {
@@ -79,7 +84,8 @@ function setup() {
   carSpeedX = [
     random(1.8, 3.5),
     random(2.3, 3.5),
-    random(2.5, 4.0)
+    random(2.5, 4.0),
+    random(2.6, 4.5)
   ];
 }
 
