@@ -135,6 +135,6 @@ function collisionDetect() {
 
 function keyPressed() {
   if (keyCode === 82) { // 82 is the key code for 'R'
-    resetGame(); // Reset game state
+    resetGame(); // Resets the game
   }
 }
