@@ -138,3 +138,4 @@ function keyPressed() {
     resetGame(); // Resets the game
   }
 }
+}
