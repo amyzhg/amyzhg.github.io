@@ -22,8 +22,9 @@ let playerMoveX = 3;
 let carX = [900, 900, 900]; // Fix array size to 3
 let carY = [150, 40, 240];
 let carSpeedX;
-let BG_Sound;
 
+let BG_Sound;
+let Death;
 let points = 0;
 
 function preload() {
@@ -33,6 +34,7 @@ function preload() {
   Orange_Truck = loadImage("Orange-Truck.png");
   Blue_Truck = loadImage("Blue-truck.png");
   BG_Sound = loadSound("Tokyo Drift.mp3");
+  Death = loadSound("DEATH.mp3");
 }
 
 function score() {
@@ -132,6 +134,8 @@ function collisionDetect() {
     ) {
       points -= 1; // Subtract points for crash
       playerY = 560; // Reset player position to the start
+
+      Death.play();
     }
   }
 }
