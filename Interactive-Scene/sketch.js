@@ -20,7 +20,7 @@ let playerMoveY = 3;
 let playerMoveX = 3;
 
 let carX = [900, 900, 900]; // Fix array size to 3
-let carY = [220, 100, 320];
+let carY = [150, 40, 240];
 let carSpeedX;
 
 let points = 0;
@@ -137,5 +137,4 @@ function keyPressed() {
   if (keyCode === 82) { // 82 is the key code for 'R'
     resetGame(); // Resets the game
   }
-}
 }
