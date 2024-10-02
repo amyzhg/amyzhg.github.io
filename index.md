@@ -8,7 +8,3 @@
 
 ## Projects
 - [Interactive Scene](Interactive-Scene)
-
-
-
-[def]: Image-Demo
