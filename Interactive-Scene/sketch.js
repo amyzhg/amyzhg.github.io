@@ -4,34 +4,46 @@
 
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-// - Visual appeal, researching things we haven't learned in class yet such as array in line 95-99
+// - Visual appeal, researching things we haven't learned in class such as text, advanced arrays
+
 let player;
-let car_red;
-let car_silly_red;
-let car_facing_brown;
-let car_2;
+let Blue_Truck;
+let Cyan_Truck;
+let Orange_Truck;
 let backgroundIMG;
 
-let sizeX = 100;
-let sizeY = 100;
+let sizeX = 200;
+let sizeY = 200;
 let playerX = 350;
 let playerY = 350;
 let playerMoveY = 3;
 let playerMoveX = 3;
 
-let carX = [900, 900, 900, 900];
-let carY = [2, 270, 190, 95];
+let carX = [900, 900, 900]; // Fix array size to 3
+let carY = [220, 100, 320];
 let carSpeedX;
 
-let gameOver = false; // Game over state
+let points = 0;
 
 function preload() {
-  backgroundIMG = loadImage("roadbg.png"); // Load BG
-  player = loadImage("chicken.png"); // Load player
-  car_silly_red = loadImage("car-silly-red.png"); // Load silly red car
-  car_facing_brown = loadImage("car-brown.png"); // Load brown car
-  car_red = loadImage("car-red.png"); // Red car
-  car_2 = loadImage("car-2.png"); // Load car
+  backgroundIMG = loadImage("BG.png");
+  player = loadImage("chicken.png");
+  Cyan_Truck = loadImage("Cyan-Truck.png");
+  Orange_Truck = loadImage("Orange-Truck.png");
+  Blue_Truck = loadImage("Blue-truck.png");
+}
+
+function score() {
+  fill(255, 255, 255);
+  textSize(50);
+  text(points, 250, 60);
+}
+
+function scoreUp() {
+  if (playerY <= 10) {
+    points += 1;
+    playerY = 560; // Reset player to the bottom after reaching the top
+  }
 }
 
 function setup() {
@@ -40,40 +52,34 @@ function setup() {
 }
 
 function resetGame() {
-  playerX = 350; // Reset player position
-  playerY = 350; // Reset player position
-  carX = [900, 900, 900, 900]; // Reset car positions
+  playerX = 900; // Reset player position
+  playerY = 590; // Reset player position
+  carX = [900, 900, 900]; // Ensure 3 cars are reset
   carSpeedX = [
-    random(1.8, 3.5),
-    random(2.3, 3.5),
-    random(2.5, 4.0),
-    random(2.6, 4.5)
-  ]; // Randomize speeds
-  gameOver = false; // Reset game over state
+    random(6, 9),
+    random(7, 11),
+    random(5, 10)
+  ]; // Randomize speeds for 3 cars
 }
 
 function draw() {
   background(backgroundIMG);
+
+  draw_player();
+  move_player();
   
-  if (!gameOver) {
-    draw_player();
-    move_player();
-    
-    loopCar();
-    moveCar();
-    drawCar();
-    
-    collisionDetect(); // Check if the chicken hits cars
-  } else {
-    fill(255);
-    textSize(32);
-    textAlign(CENTER); // Center the text
-    text("Game Over! Press R to Restart", width / 2, height / 2);
-  }
+  loopCar();
+  moveCar();
+  drawCar();
+  
+  score();
+  scoreUp();
+
+  collisionDetect(); // Check if the chicken hits cars
 }
 
 function draw_player() {
-  image(player, playerX, playerY, 50, 50);
+  image(player, playerX, playerY, 60, 60);
 }
 
 function move_player() {
@@ -92,10 +98,9 @@ function move_player() {
 }
 
 function drawCar() {
-  image(car_silly_red, carX[0], carY[0], sizeX, sizeY);
-  image(car_red, carX[1], carY[1], sizeX, sizeY);
-  image(car_facing_brown, carX[2], carY[2], sizeX, sizeY);
-  image(car_2, carX[3], carY[3], sizeX, sizeY);
+  image(Cyan_Truck, carX[0], carY[0], sizeX, sizeY);
+  image(Blue_Truck, carX[1], carY[1], sizeX, sizeY);
+  image(Orange_Truck, carX[2], carY[2], sizeX, sizeY);
 }
 
 function moveCar() {
@@ -108,27 +113,29 @@ function loopCar() {
   for (let i = 0; i < carX.length; i++) {
     if (carX[i] < -65) { // When car goes off-screen
       carX[i] = width + random(100, 300); // Reset position off screen
-      carSpeedX[i] = random(1.8, 4.0); // Randomize new speed
+      carSpeedX[i] = random(5, 11); // Randomize new speed
     }
   }
 }
 
 function collisionDetect() {
   for (let i = 0; i < carX.length; i++) {
-    // Check if the chicken intersects with any car
+    // Check if the chicken crashes with any car
     if (
       playerX < carX[i] + sizeX &&
-      playerX + 50 > carX[i] &&
+      playerX + 90 > carX[i] &&
       playerY < carY[i] + sizeY &&
-      playerY + 50 > carY[i]
+      playerY + 90 > carY[i]
     ) {
-      gameOver = true; // Set game over state
+      points -= 1; // Subtract points for crash
+      playerY = 560; // Reset player position to the start
     }
   }
 }
 
 function keyPressed() {
   if (keyCode === 82) { // 82 is the key code for 'R'
-    resetGame(); // Reset game state
+    resetGame(); // Resets the game
   }
+}
 }
