@@ -56,9 +56,9 @@ function resetGame() {
   playerY = 590; // Reset player position
   carX = [900, 900, 900]; // Ensure 3 cars are reset
   carSpeedX = [
-    random(1.8, 3.5),
-    random(2.3, 3.5),
-    random(2.5, 4.0)
+    random(6, 9),
+    random(7, 11),
+    random(5, 10)
   ]; // Randomize speeds for 3 cars
 }
 
@@ -113,7 +113,7 @@ function loopCar() {
   for (let i = 0; i < carX.length; i++) {
     if (carX[i] < -65) { // When car goes off-screen
       carX[i] = width + random(100, 300); // Reset position off screen
-      carSpeedX[i] = random(1.8, 4.0); // Randomize new speed
+      carSpeedX[i] = random(5, 11); // Randomize new speed
     }
   }
 }
