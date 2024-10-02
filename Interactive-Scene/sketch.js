@@ -22,6 +22,7 @@ let playerMoveX = 3;
 let carX = [900, 900, 900]; // Fix array size to 3
 let carY = [150, 40, 240];
 let carSpeedX;
+let BG_Sound;
 
 let points = 0;
 
@@ -31,6 +32,7 @@ function preload() {
   Cyan_Truck = loadImage("Cyan-Truck.png");
   Orange_Truck = loadImage("Orange-Truck.png");
   Blue_Truck = loadImage("Blue-truck.png");
+  BG_Sound = loadSound("Tokyo Drift.mp3");
 }
 
 function score() {
@@ -49,6 +51,7 @@ function scoreUp() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   resetGame(); // State
+  BG_Sound.play();
 }
 
 function resetGame() {
