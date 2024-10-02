@@ -123,9 +123,9 @@ function collisionDetect() {
     // Check if the chicken crashes with any car
     if (
       playerX < carX[i] + sizeX &&
-      playerX + 50 > carX[i] &&
+      playerX + 90 > carX[i] &&
       playerY < carY[i] + sizeY &&
-      playerY + 50 > carY[i]
+      playerY + 90 > carY[i]
     ) {
       points -= 1; // Subtract points for crash
       playerY = 560; // Reset player position to the start
