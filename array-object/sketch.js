@@ -10,8 +10,8 @@ let Game;
 
 function preload() {
   BG = loadImage('en.png');
-  Intro = loadImage('intro.jpg');
-  Game = loadImage('Suika-Font.png');
+  Intro = loadImage('./images/intro.png');
+  Game = loadImage('./images/Suika-Font.png');
 }
 
 function setup() {
@@ -20,7 +20,7 @@ function setup() {
 
 function draw() {
   background(Intro);
-  image(Game, 450, 150);  
+  image(Game, windowWidth/5, windowHeight/15,);  
 
 }
 
