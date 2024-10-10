@@ -6,6 +6,8 @@
 - [Traffic Light Completion](Traffic-Light)
 - [Bouncing Cats](Bouncing-Balls)
 - [Generative Art](Art)
-
+- [Terrain Generation](Terrain)
+- [Bubble Demo](bubble)
 ## Projects
 - [Interactive Scene](Interactive-Scene)
+- [Arrays and Object Notation](array-object)
