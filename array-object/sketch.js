@@ -4,6 +4,7 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
+// - using an ICO 
 
 let intro;
 let Game;
@@ -12,7 +13,8 @@ function preload() {
   BG = loadImage('en.png');
   Intro = loadImage('./images/intro.png');
   Game = loadImage('./images/Suika-font.png');
-  PlayButton = loadImage('./images/Play-Btn.png'); 
+  // PlayButton = loadImage('./images/Play-Btn.png'); 
+  PlayButton = loadImage('PLAY (1).png'); 
 }
 
 function setup() {
@@ -23,9 +25,6 @@ function draw() {
   background(Intro);
   image(Game, -160, -5,);
   image(PlayButton, 500, 200,);
-  PlayButton.style.height = '500px';
-  PlayButton.style.width = '600px';
-
 }
 
 
