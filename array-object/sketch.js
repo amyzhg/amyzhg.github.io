@@ -13,8 +13,9 @@ function preload() {
   BG = loadImage('en.png');
   Intro = loadImage('./images/intro.png');
   Game = loadImage('./images/Suika-font.png');
-  // PlayButton = loadImage('./images/Play-Btn.png'); 
-  PlayButton = loadImage('PLAY (1).png'); 
+  playButtonPressed = loadImage('PLAY (5).png');
+  playButton = loadImage('PLAY (7).png');
+
 }
 
 function setup() {
@@ -24,7 +25,15 @@ function setup() {
 function draw() {
   background(Intro);
   image(Game, -160, -5,);
-  image(PlayButton, 500, 200,);
+  // fix mouse Y
+
+  if ((mouseX > 500) && (mouseY < 300) && (mouseX <=1120) && (mouseY >= 100))   {
+    image(playButtonPressed, 500, 400,);
+  }
+  else {
+    image(playButton, 500, 400,);
+  }
+  // image(playButton, 500, 300,);
 }
 
 
