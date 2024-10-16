@@ -11,11 +11,10 @@ let game;
 let gameState = "start";
 
 function preload() {
-  BG = loadImage('en.png');
   intro = loadImage('./images/intro.png');
   game = loadImage('./images/Suika-font.png');
-  playButtonPressed = loadImage('greyBtn.png');
-  playButton = loadImage('yellowBtn.png');
+  playButtonPressed = loadImage('yellowBtn.png');
+  playButton = loadImage('greyBtn.png');
 
 }
 
@@ -52,7 +51,7 @@ function mouseClicked() {
 }
 
 function playScreen() {
-  background(255);
+  background(intro);
 }
 
 // inspo https://openprocessing.org/sketch/2084936 
