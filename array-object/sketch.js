@@ -7,14 +7,15 @@
 // - using an ICO 
 
 let intro;
-let Game;
+let game;
+let gameState = "start";
 
 function preload() {
   BG = loadImage('en.png');
-  Intro = loadImage('./images/intro.png');
-  Game = loadImage('./images/Suika-font.png');
-  playButtonPressed = loadImage('PLAY (5).png');
-  playButton = loadImage('PLAY (7).png');
+  intro = loadImage('./images/intro.png');
+  game = loadImage('./images/Suika-font.png');
+  playButtonPressed = loadImage('greyBtn.png');
+  playButton = loadImage('yellowBtn.png');
 
 }
 
@@ -23,19 +24,36 @@ function setup() {
 }
 
 function draw() {
-  background(Intro);
-  image(Game, -160, -5,);
+  if (gameState === "start") {
+    startScreen();
+  }
+  else if (gameState === "play") {
+    playScreen();
+  }
+}
+
+function startScreen() {
+  background(intro);
+  image(game, -160, -5,);
   // fix mouse Y
 
-  if ((mouseX > 500) && (mouseY < 300) && (mouseX <=1120) && (mouseY >= 100))   {
+  if (mouseX > 500 && mouseY < 600 && mouseX <=1120 && mouseY > 390) {
     image(playButtonPressed, 500, 400,);
   }
   else {
     image(playButton, 500, 400,);
   }
-  // image(playButton, 500, 300,);
 }
 
+function mouseClicked() {
+  if (gameState === "start" && (mouseX > 500 && mouseY < 600 && mouseX <=1120 && mouseY > 390)) {
+    gameState = "play";
+  }
+}
+
+function playScreen() {
+  background(255);
+}
 
 // inspo https://openprocessing.org/sketch/2084936 
 // inspo https://scratch.mit.edu/projects/911281961/editor/
