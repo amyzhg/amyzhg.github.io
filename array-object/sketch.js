@@ -4,12 +4,13 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-// - using an ICO 
+// - using an ICO using state values 
 
 let intro;
 let game;
 let gameState = "start";
 
+// loads the images
 function preload() {
   intro = loadImage('./images/intro.png');
   game = loadImage('./images/Suika-font.png');
@@ -34,7 +35,6 @@ function draw() {
 function startScreen() {
   background(intro);
   image(game, -160, -5,);
-  // fix mouse Y
 
   if (mouseX > 500 && mouseY < 600 && mouseX <=1120 && mouseY > 390) {
     image(playButtonPressed, 500, 400,);
