@@ -16,7 +16,6 @@ function preload() {
   game = loadImage('./images/Suika-font.png');
   playButtonPressed = loadImage('yellowBtn.png');
   playButton = loadImage('greyBtn.png');
-
 }
 
 function setup() {
