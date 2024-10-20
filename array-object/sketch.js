@@ -40,8 +40,8 @@ function preload() {
   };
   intro = loadImage('./images/intro.png');
   game = loadImage('./images/Suika-font.png');
-  playButtonPressed = loadImage('yellowBtn.png');
-  playButton = loadImage('greyBtn.png');
+  playButtonPressed = loadImage('/images/yellowBtn.png');
+  playButton = loadImage('/images/greyBtn.png');
 }
 
 function setup() {
@@ -59,13 +59,23 @@ function draw() {
 
 function startScreen() {
   background(intro);
-  image(game, -160, -5,);
+  
+  // Centers the game title horizontally and vertically
+  image(game, (width - game.width) / 2, (height - game.height) / 10 + 50);
 
-  if (mouseX > 500 && mouseY < 600 && mouseX <=1120 && mouseY > 390) {
-    image(playButtonPressed, 500, 400,);
-  }
-  else {
-    image(playButton, 500, 400,);
+  // Defines the button size
+  let buttonWidth = playButton.width;
+  let buttonHeight = playButton.height;
+
+  // Centers the play button horizontally and place it slightly lower on the screen
+  let buttonX = (width - buttonWidth) / 2;
+  let buttonY = height / 2 + 10;
+
+  // Checks if the mouse is over the button
+  if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight) {
+    image(playButtonPressed, buttonX, buttonY);
+  } else {
+    image(playButton, buttonX, buttonY);
   }
 }
 
