@@ -6,6 +6,7 @@
 - [Traffic Light Completion](traffic-light)
 - [Bouncing Cats](bouncing-balls)
 - [Generative Art](art)
+- [Perlin Noise Ball](perlin)
 - [Terrain Generation](terrain)
 - [Bubble Demo](bubble)
 - [Translate/Rotate](translate)

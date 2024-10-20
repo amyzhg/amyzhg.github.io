@@ -1,5 +1,4 @@
 // Perlin Noise Ball
-// Oct 7, 2024
 
 let x;
 let y;
@@ -13,6 +12,7 @@ function setup() {
 
 function draw() {
   background(220);
+
   x = noise(time) * width;
   y = noise(time + 100) * height;
   circle(x, y, 50);
