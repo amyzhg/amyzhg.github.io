@@ -1,15 +1,15 @@
 # Comp Sci 30
 
 ## Demos
-- [Square Moving Around Screen](Square-Moving)
-- [Image Demo With Sonic](Image-Demo)
-- [Traffic Light Completion](Traffic-Light)
-- [Bouncing Cats](Bouncing-Balls)
+- [Square Moving Around Screen](square-moving)
+- [Image Demo With Sonic](image-demo)
+- [Traffic Light Completion](traffic-light)
+- [Bouncing Cats](bouncing-balls)
 - [Generative Art](Art)
 - [Terrain Generation](Terrain)
 - [Bubble Demo](bubble)
 - [Translate/Rotate](translate)
 
 ## Projects
-- [Interactive Scene](Interactive-Scene)
+- [Interactive Scene](interactive-scene)
 - [Arrays and Object Notation](array-object)
