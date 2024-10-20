@@ -5,8 +5,8 @@
 - [Image Demo With Sonic](image-demo)
 - [Traffic Light Completion](traffic-light)
 - [Bouncing Cats](bouncing-balls)
-- [Generative Art](Art)
-- [Terrain Generation](Terrain)
+- [Generative Art](art)
+- [Terrain Generation](terrain)
 - [Bubble Demo](bubble)
 - [Translate/Rotate](translate)
 
