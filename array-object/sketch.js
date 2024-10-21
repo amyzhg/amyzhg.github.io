@@ -6,92 +6,133 @@
 // - describe what you did to take this project "above and beyond"
 // - using an ICO using state values 
 
+let engine;
+let world;
+
 let intro;
 let game;
 let gameState = "start";
 
-let fruit1;
-let fruit2;
-let fruit3;
-let fruit4;
-let fruit5;
-let fruit6;
-let fruit7;
-let fruit8;
-let fruit9;
-let fruit10;
-let fruit11;
+let cats = [];
+let catImages = [];
+let numCats = 10; // Initial number of cats
 
-// loads the images
+// Load the images
 function preload() {
-  let fruits = {
-    fruit1: loadImage('./images/fruit1.png'),
-    fruit2: loadImage('./images/fruit2.png'),
-    fruit3: loadImage('./images/fruit3.png'),
-    fruit4: loadImage('./images/fruit4.png'),
-    fruit5: loadImage('./images/fruit5.png'),
-    fruit6: loadImage('./images/fruit6.png'),
-    fruit7: loadImage('./images/fruit7.png'),
-    fruit8: loadImage('./images/fruit8.png'),
-    fruit9: loadImage('./images/fruit9.png'),
-    fruit10: loadImage('./images/fruit10.png'),
-    fruit11: loadImage('./images/fruit11.png'),
-    fruit: random([fruit1, fruit2, fruit3, fruit4,])
-  };
-  intro = loadImage('./images/intro.png');
-  game = loadImage('./images/Suika-font.png');
-  playButtonPressed = loadImage('/images/yellowBtn.png');
-  playButton = loadImage('/images/greyBtn.png');
+    catImages.push(loadImage('./images/cat1.png'));
+    catImages.push(loadImage('./images/cat2.png'));
+    catImages.push(loadImage('./images/cat3.png'));
+    catImages.push(loadImage('./images/cat4.png'));
+    catImages.push(loadImage('./images/cat5.png'));
+    catImages.push(loadImage('./images/cat6.png'));
+    catImages.push(loadImage('./images/cat7.png'));
+    intro = loadImage('./images/intro.png');
+    game = loadImage('./images/Suika-font.png');
+    playButtonPressed = loadImage('/images/yellowBtn.png');
+    playButton = loadImage('/images/greyBtn.png');
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, windowHeight);
+    engine = Matter.Engine.create();
+    world = engine.world;
+
+    let ground = Matter.Bodies.rectangle(width / 2, height - 2, width, 20, { isStatic: true });
+    Matter.World.add(world, ground);
+
+    // Initialize cats
+    for (let i = 0; i < numCats; i++) {
+        spawnCat();
+    }
 }
 
 function draw() {
-  
-  if (gameState === "start") {
-    startScreen();
-  }
-  else if (gameState === "play") {
-    playScreen();
-  }
+    if (gameState === "start") {
+        startScreen();
+    } else if (gameState === "play") {
+        playScreen();
+    }
 }
 
 function startScreen() {
-  background(intro);
-  
-  // Centers the game title horizontally and vertically
-  image(game, (width - game.width) / 2, (height - game.height) / 10 + 50);
+    background(intro);
+    image(game, (width - game.width) / 2, (height - game.height) / 10 + 50);
+    
+    let buttonWidth = playButton.width;
+    let buttonHeight = playButton.height;
 
-  // Defines the button size
-  let buttonWidth = playButton.width;
-  let buttonHeight = playButton.height;
+    let buttonX = (width - buttonWidth) / 2;
+    let buttonY = height / 2 + 10;
 
-  // Centers the play button horizontally and place it slightly lower on the screen
-  let buttonX = (width - buttonWidth) / 2;
-  let buttonY = height / 2 + 10;
-
-  // Checks if the mouse is over the button
-  if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight) {
-    image(playButtonPressed, buttonX, buttonY);
-  } else {
-    image(playButton, buttonX, buttonY);
-  }
+    if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight) {
+        image(playButtonPressed, buttonX, buttonY);
+    } else {
+        image(playButton, buttonX, buttonY);
+    }
 }
 
 function mouseClicked() {
-  // Plays the game when button is clicked
-  if (gameState === "start" && (mouseX > 500 && mouseY < 600 && mouseX <=1120 && mouseY > 390)) {
-    gameState = "play";
-  }
+    if (gameState === "start") {
+        gameState = "play";
+    } else if (gameState === "play" && mouseButton === LEFT) {
+        spawnCat(); // Spawn a new cat on left-click
+    }
 }
 
 function playScreen() {
-  background(intro);
+    background("white");
 
+    Matter.Engine.update(engine); // Update the Matter.js engine
 
+    // Draw and update all cats
+    for (let cat of cats) {
+        cat.update();
+        cat.draw();
+    }
 }
-// inspo https://openprocessing.org/sketch/2084936 
-// inspo https://scratch.mit.edu/projects/911281961/editor/
-// intro inspo https://waytoomany.games/wp-content/uploads/2023/10/2023102406564200_s.jpg
+
+function spawnCat() {
+    let randomIndex = int(random(0, catImages.length));
+    let x = random(width);
+    let y = random(height - 50); // Spawn within the canvas
+    let size = random(30, 80); // Random size for the cat
+
+    let cat = new Cat(randomIndex, createVector(x, y), size);
+    cats.push(cat);
+}
+
+class Cat {
+    constructor(index, position, diameter) {
+        this.index = index % catImages.length;
+        this.position = position;
+        this.diameter = diameter;
+        this.velocity = createVector(random(-2, 2), random(-2, 2)); // Random velocity
+    }
+
+    update() {
+        // Update position based on velocity
+        this.position.add(this.velocity);
+
+        // Bounce off edges
+        if (this.position.x < this.diameter / 2 || this.position.x > width - this.diameter / 2) {
+            this.velocity.x *= -1;
+        }
+        if (this.position.y < this.diameter / 2 || this.position.y > height - this.diameter / 2) {
+            this.velocity.y *= -1;
+        }
+
+        // Move the cat with the mouse if it's clicked
+        if (mouseIsPressed && dist(mouseX, mouseY, this.position.x, this.position.y) < this.diameter / 2) {
+            this.position.x = mouseX;
+            this.position.y = mouseY;
+        }
+    }
+
+    draw() {
+        push();
+        translate(this.position.x, this.position.y);
+        imageMode(CENTER);
+        image(catImages[this.index], 0, 0, this.diameter, this.diameter); // Draw cat image
+        pop();
+    }
+}
