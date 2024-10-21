@@ -49,6 +49,7 @@ function setup() {
 }
 
 function draw() {
+  
   if (gameState === "start") {
     startScreen();
   }
