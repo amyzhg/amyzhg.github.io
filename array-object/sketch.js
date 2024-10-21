@@ -80,6 +80,7 @@ function startScreen() {
 }
 
 function mouseClicked() {
+  // Plays the game when button is clicked
   if (gameState === "start" && (mouseX > 500 && mouseY < 600 && mouseX <=1120 && mouseY > 390)) {
     gameState = "play";
   }
