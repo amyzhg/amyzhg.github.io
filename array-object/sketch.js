@@ -19,120 +19,119 @@ let numCats = 10; // Initial number of cats
 
 // Load the images
 function preload() {
-    catImages.push(loadImage('./images/cat1.png'));
-    catImages.push(loadImage('./images/cat2.png'));
-    catImages.push(loadImage('./images/cat3.png'));
-    catImages.push(loadImage('./images/cat4.png'));
-    catImages.push(loadImage('./images/cat5.png'));
-    catImages.push(loadImage('./images/cat6.png'));
-    catImages.push(loadImage('./images/cat7.png'));
-    intro = loadImage('./images/intro.png');
-    game = loadImage('./images/Suika-font.png');
-    playButtonPressed = loadImage('/images/yellowBtn.png');
-    playButton = loadImage('/images/greyBtn.png');
+  catImages.push(loadImage('./images/cat1.png'));
+  catImages.push(loadImage('./images/cat2.png'));
+  catImages.push(loadImage('./images/cat3.png'));
+  catImages.push(loadImage('./images/cat4.png'));
+  catImages.push(loadImage('./images/cat5.png'));
+  catImages.push(loadImage('./images/cat6.png'));
+  catImages.push(loadImage('./images/cat7.png'));
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    engine = Matter.Engine.create();
-    world = engine.world;
+  createCanvas(windowWidth, windowHeight);
+  engine = Matter.Engine.create();
+  world = engine.world;
 
-    let ground = Matter.Bodies.rectangle(width / 2, height - 2, width, 20, { isStatic: true });
-    Matter.World.add(world, ground);
+  let ground = Matter.Bodies.rectangle(width / 2, height - 2, width, 20, { isStatic: true });
+  Matter.World.add(world, ground);
 
-    // Initialize cats
-    for (let i = 0; i < numCats; i++) {
-        spawnCat();
-    }
+  // Initialize cats
+  for (let i = 0; i < numCats; i++) {
+    spawnCat();
+  }
 }
 
 function draw() {
-    if (gameState === "start") {
-        startScreen();
-    } else if (gameState === "play") {
-        playScreen();
-    }
+  if (gameState === "start") {
+    startScreen();
+  }
+  else if (gameState === "play") {
+    playScreen();
+  }
 }
 
 function startScreen() {
-    background(intro);
-    image(game, (width - game.width) / 2, (height - game.height) / 10 + 50);
+  background(intro);
+  image(game, (width - game.width) / 2, (height - game.height) / 10 + 50);
     
-    let buttonWidth = playButton.width;
-    let buttonHeight = playButton.height;
+  let buttonWidth = playButton.width;
+  let buttonHeight = playButton.height;
 
-    let buttonX = (width - buttonWidth) / 2;
-    let buttonY = height / 2 + 10;
+  let buttonX = (width - buttonWidth) / 2;
+  let buttonY = height / 2 + 10;
 
-    if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight) {
-        image(playButtonPressed, buttonX, buttonY);
-    } else {
-        image(playButton, buttonX, buttonY);
-    }
+  if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight) {
+    image(playButtonPressed, buttonX, buttonY);
+  }
+  else {
+    image(playButton, buttonX, buttonY);
+  }
 }
 
 function mouseClicked() {
-    if (gameState === "start") {
-        gameState = "play";
-    } else if (gameState === "play" && mouseButton === LEFT) {
-        spawnCat(); // Spawn a new cat on left-click
-    }
+  if (gameState === "start") {
+    gameState = "play";
+  }
+  else if (gameState === "play" && mouseButton === LEFT) {
+    spawnCat(); // Spawn a new cat on left-click
+  }
 }
 
 function playScreen() {
-    background("white");
+  background("white");
 
-    Matter.Engine.update(engine); // Update the Matter.js engine
+  Matter.Engine.update(engine); // Update the Matter.js engine
 
-    // Draw and update all cats
-    for (let cat of cats) {
-        cat.update();
-        cat.draw();
-    }
+  // Draw and update all cats
+  for (let cat of cats) {
+    cat.update();
+    cat.draw();
+  }
 }
 
 function spawnCat() {
-    let randomIndex = int(random(0, catImages.length));
-    let x = random(width);
-    let y = random(height - 50); // Spawn within the canvas
-    let size = random(30, 80); // Random size for the cat
+  let randomIndex = int(random(0, catImages.length));
+  let x = random(width);
+  let y = random(height - 50); // Spawn within the canvas
+  let size = random(30, 80); // Random size for the cat
 
-    let cat = new Cat(randomIndex, createVector(x, y), size);
-    cats.push(cat);
+  let cat = new Cat(randomIndex, createVector(x, y), size);
+  cats.push(cat);
 }
 
 class Cat {
-    constructor(index, position, diameter) {
-        this.index = index % catImages.length;
-        this.position = position;
-        this.diameter = diameter;
-        this.velocity = createVector(random(-2, 2), random(-2, 2)); // Random velocity
+  constructor(index, position, diameter) {
+    this.index = index % catImages.length;
+    this.position = position;
+    this.diameter = diameter;
+    this.velocity = createVector(random(-2, 2), random(-2, 2)); // Random velocity
+  }
+
+  update() {
+    // Update position based on velocity
+    this.position.add(this.velocity);
+
+    // Bounce off edges
+    if (this.position.x < this.diameter / 2 || this.position.x > width - this.diameter / 2) {
+      this.velocity.x *= -1;
+    }
+    if (this.position.y < this.diameter / 2 || this.position.y > height - this.diameter / 2) {
+      this.velocity.y *= -1;
     }
 
-    update() {
-        // Update position based on velocity
-        this.position.add(this.velocity);
-
-        // Bounce off edges
-        if (this.position.x < this.diameter / 2 || this.position.x > width - this.diameter / 2) {
-            this.velocity.x *= -1;
-        }
-        if (this.position.y < this.diameter / 2 || this.position.y > height - this.diameter / 2) {
-            this.velocity.y *= -1;
-        }
-
-        // Move the cat with the mouse if it's clicked
-        if (mouseIsPressed && dist(mouseX, mouseY, this.position.x, this.position.y) < this.diameter / 2) {
-            this.position.x = mouseX;
-            this.position.y = mouseY;
-        }
+    // Move the cat with the mouse if it's clicked
+    if (mouseIsPressed && dist(mouseX, mouseY, this.position.x, this.position.y) < this.diameter / 2) {
+      this.position.x = mouseX;
+      this.position.y = mouseY;
     }
+  }
 
-    draw() {
-        push();
-        translate(this.position.x, this.position.y);
-        imageMode(CENTER);
-        image(catImages[this.index], 0, 0, this.diameter, this.diameter); // Draw cat image
-        pop();
-    }
+  draw() {
+    push();
+    translate(this.position.x, this.position.y);
+    imageMode(CENTER);
+    image(catImages[this.index], 0, 0, this.diameter, this.diameter); // Draw cat image
+    pop();
+  }
 }
