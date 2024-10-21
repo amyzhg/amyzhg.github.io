@@ -1,21 +1,24 @@
 // Arrays and Object Notation Assignment
 // Amy Zhang
 // Oct 21, 2024
-//
+
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-// - using an ICO using state values 
+// - using an ICO using state values
+// - Using Matter.Js https://brm.io/matter-js/
+// - HTML alert for controls
+// - Using Vectors
+
+// - inspiration: https://cat-bounce.com/
 
 let engine;
 let world;
 
-let intro;
-let game;
-let gameState = "start";
+let gameState = "play";
 
 let cats = [];
 let catImages = [];
-let numCats = 10; // Initial number of cats
+let numCats = 30; // Initial spawm number of cats
 
 // Load the images
 function preload() {
@@ -36,7 +39,7 @@ function setup() {
   let ground = Matter.Bodies.rectangle(width / 2, height - 2, width, 20, { isStatic: true });
   Matter.World.add(world, ground);
 
-  // Initialize cats
+  // Spawns cats
   for (let i = 0; i < numCats; i++) {
     spawnCat();
   }
@@ -51,30 +54,10 @@ function draw() {
   }
 }
 
-function startScreen() {
-  background(intro);
-  image(game, (width - game.width) / 2, (height - game.height) / 10 + 50);
-    
-  let buttonWidth = playButton.width;
-  let buttonHeight = playButton.height;
-
-  let buttonX = (width - buttonWidth) / 2;
-  let buttonY = height / 2 + 10;
-
-  if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight) {
-    image(playButtonPressed, buttonX, buttonY);
-  }
-  else {
-    image(playButton, buttonX, buttonY);
-  }
-}
 
 function mouseClicked() {
-  if (gameState === "start") {
-    gameState = "play";
-  }
-  else if (gameState === "play" && mouseButton === LEFT) {
-    spawnCat(); // Spawn a new cat on left-click
+  if (gameState === "play" && mouseButton === LEFT) {
+    spawnCat(); // Spawns a new random cat on left-click
   }
 }
 
@@ -83,7 +66,7 @@ function playScreen() {
 
   Matter.Engine.update(engine); // Update the Matter.js engine
 
-  // Draw and update all cats
+  // Draws and update all cats
   for (let cat of cats) {
     cat.update();
     cat.draw();
@@ -93,8 +76,8 @@ function playScreen() {
 function spawnCat() {
   let randomIndex = int(random(0, catImages.length));
   let x = random(width);
-  let y = random(height - 50); // Spawn within the canvas
-  let size = random(30, 80); // Random size for the cat
+  let y = random(height - 50); // Spawns within the canvas
+  let size = random(30, 200); // Random size for the cat
 
   let cat = new Cat(randomIndex, createVector(x, y), size);
   cats.push(cat);
