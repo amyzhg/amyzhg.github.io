@@ -6,8 +6,7 @@
 // - using an ICO using state values
 // - Using Matter.Js https://brm.io/matter-js/
 // - HTML alert for controls
-// - Using Vectors
-// - Added user interaction where clicking on a cat changes its colour
+// - Using a class as object notation
 
 // - inspiration: https://cat-bounce.com/
 
