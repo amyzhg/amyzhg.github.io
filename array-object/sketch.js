@@ -3,11 +3,11 @@
 // Oct 21, 2024
 
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
 // - using an ICO using state values
 // - Using Matter.Js https://brm.io/matter-js/
 // - HTML alert for controls
 // - Using Vectors
+// - Added user interaction where clicking on a cat changes its colour
 
 // - inspiration: https://cat-bounce.com/
 
@@ -18,7 +18,7 @@ let gameState = "play";
 
 let cats = [];
 let catImages = [];
-let numCats = 30; // Initial spawm number of cats
+let numCats = 30; // Initial number of cats
 
 // Load the images
 function preload() {
@@ -54,7 +54,6 @@ function draw() {
   }
 }
 
-
 function mouseClicked() {
   if (gameState === "play" && mouseButton === LEFT) {
     spawnCat(); // Spawns a new random cat on left-click
@@ -66,7 +65,7 @@ function playScreen() {
 
   Matter.Engine.update(engine); // Update the Matter.js engine
 
-  // Draws and update all cats
+  // Draws and updates all cats
   for (let cat of cats) {
     cat.update();
     cat.draw();
@@ -89,6 +88,7 @@ class Cat {
     this.position = position;
     this.diameter = diameter;
     this.velocity = createVector(random(-2, 2), random(-2, 2)); // Random velocity
+    this.color = color(random(255), random(255), random(255)); // Assign random color
   }
 
   update() {
@@ -114,6 +114,9 @@ class Cat {
     push();
     translate(this.position.x, this.position.y);
     imageMode(CENTER);
+
+    // Apply tint with the assigned random color before drawing the image
+    tint(this.color);
     image(catImages[this.index], 0, 0, this.diameter, this.diameter); // Draw cat image
     pop();
   }
