@@ -10,6 +10,8 @@
 - [Terrain Generation](terrain)
 - [Bubble Demo](bubble)
 - [Translate/Rotate](translate)
+- [Grid Demo](grid)
+- [Game of Life](game=of-life)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
