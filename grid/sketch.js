@@ -1,20 +1,16 @@
 // Grid Demp
 // Amy Zhang
-// Oct 22, 202GRID_SIZE
+// Oct 22,
 
+// if hardcoding the grid, use this:
 // let grid = [[1, 0, 0, 1],
 //             [0, 1, 1, 0],
-//             [0, 0, 1, 1],
+//             [1, 0, 1, 1],
 //             [1, 1, 1, 0]];
-
 
 let grid;
 let cellSize;
-const GRID_SIZE = 2;
-let y;
-let x;
-
-let interaction;
+const GRID_SIZE = 10;
 
 function setup() {
   if (windowWidth < windowHeight) {
@@ -43,18 +39,17 @@ function draw() {
 }
 
 function mousePressed() {
-
-
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
-  // toggle self
+
+  //toggle self
   toggleCell(x, y);
 
   //toggle neighbours
   toggleCell(x - 1, y);
   toggleCell(x + 1, y);
   toggleCell(x, y - 1);
-  toggleCell(x, y -1);
+  toggleCell(x, y + 1);
 }
 
 function toggleCell(x, y) {
@@ -121,4 +116,3 @@ function generateEmptyGrid(cols, rows) {
   }
   return newGrid;
 }
-
