@@ -1,6 +1,5 @@
-// Grid Demp
-// Amy Zhang
-// Oct 22,
+// Grid Demo
+// Oct 22, 2024
 
 // if hardcoding the grid, use this:
 // let grid = [[1, 0, 0, 1],
@@ -10,8 +9,15 @@
 
 let grid;
 let cellSize;
-const GRID_SIZE = 10;
+const GRID_SIZE = 50;
 let shouldToggleNeighbours = false;
+let autoPlayisOn = false;
+let renderOnFrameNumber = 5;
+let gosper;
+
+function preload() {
+  gosper = loadJSON("gosper.json");
+}
 
 function setup() {
   if (windowWidth < windowHeight) {
@@ -37,6 +43,10 @@ function windowResized() {
 function draw() {
   background(220);
   displayGrid();
+  if (autoPlayisOn && frameCount % renderOnFrameNumber ===0) {
+    grid = updateGrid();
+  
+  }
 }
 
 function mousePressed() {
@@ -44,16 +54,15 @@ function mousePressed() {
   let y = Math.floor(mouseY/cellSize);
 
   //toggle self
+  toggleCell(x, y);
 
-  //toggle neighbours
   if (shouldToggleNeighbours) {
-    toggleCell(x, y);
+    //toggle neighbours
     toggleCell(x - 1, y);
     toggleCell(x + 1, y);
     toggleCell(x, y - 1);
     toggleCell(x, y + 1);
   }
-
 }
 
 function toggleCell(x, y) {
@@ -75,54 +84,65 @@ function keyPressed() {
   if (key === "e") {
     grid = generateEmptyGrid(GRID_SIZE, GRID_SIZE);
   }
-  if ( key === "n") {
+  if (key === "n") {
     shouldToggleNeighbours = !shouldToggleNeighbours;
   }
-  if (key === "" ) {
+  if (key === " ") {
     grid = updateGrid();
+  }
+  if (key === "a") {
+    autoPlayisOn = !autoPlayisOn;
+  }
+  if (key === "g") {
+    grid = gosper;
   }
 }
 
 function updateGrid() {
-  //make another array to hold the newt turn
+  //make another array to hold the next turn
   let nextTurn = generateEmptyGrid(GRID_SIZE, GRID_SIZE);
 
-  // look at every cell
+  //look at every cell
   for (let y = 0; y < GRID_SIZE; y++) {
-    for (x = 0; x < GRID_SIZE; x++)
+    for (let x = 0; x < GRID_SIZE; x++) {
       let neighbours = 0;
 
-      // look at every neighbour around it
-      for (let i = -1 ; i <= 1; i++) {
+      //look at every neighbour around it
+      for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
-          // dont fall off the edge
-          if ( x+j >= 0 && x+j < GRID_SIZE && y+i >= 0 && y+i < GRID_SIZE);
-          neighbours += grid[y+i][x+j];
-
+          //don't fall off the edge
+          if (x+j >= 0 && x+j < GRID_SIZE && y+i >= 0 && y+i < GRID_SIZE) {
+            neighbours += grid[y+i][x+j];
+          }
+        }
       }
-    }
-  }
 
-  neighbours -= grid[y][x];
+      //don't count yourself as a neighbour
+      neighbours -= grid[y][x];
 
-  if (grid[y][x] === 1) { // alive
-    if (neighbours === 2 || neighbours === 3) {
-      nextTurn[y][x] =1;
-    }
-    else {
-      nextTurn[y][x] = 0;
-    }
-  }
-  if (grid[y][x] === 0) {
-    if (neighbours === 3) {
-      nextTurn[y][x] = 1;
-    }
-    else {
-      nextTurn[y][x] = 0;
+      //apply the rules
+      if (grid[y][x] === 1) { //alive
+        if (neighbours === 2 || neighbours === 3) {
+          nextTurn[y][x] = 1;
+        }
+        else {
+          nextTurn[y][x] = 0;
+        }
+      }
+
+      if (grid[y][x] === 0) { //dead
+        if (neighbours === 3) {
+          nextTurn[y][x] = 1;
+        }
+        else {
+          nextTurn[y][x] = 0;
+        }
+      }
     }
   }
   return nextTurn;
 }
+
 
 function displayGrid() {
   for (let y = 0; y < GRID_SIZE; y++) {
