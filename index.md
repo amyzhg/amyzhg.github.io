@@ -11,7 +11,8 @@
 - [Bubble Demo](bubble)
 - [Translate/Rotate](translate)
 - [Grid Demo](grid)
-- [Game of Life](game=of-life)
+- [Game of Life](game-of-life)
+- [Moving Character in Grid](character-grid)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
