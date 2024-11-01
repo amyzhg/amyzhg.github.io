@@ -40,3 +40,7 @@ function draw() {
 // inspo https://codepen.io/Danchuk/pen/waGgqj 
 // https://www.youtube.com/watch?v=iJ_B_5W-pDA
 // https://editor.p5js.org/simontiger/sketches/WozAjsXVK
+
+// api keys
+// https://aimlapi.com/best-ai-apis-for-free
+// https://ai.google.dev/gemini-api/docs/quickstart?lang=node
