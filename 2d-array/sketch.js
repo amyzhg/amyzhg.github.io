@@ -7,40 +7,51 @@
 
 // - Attributes to DANI MACCARI for sprites
 
-const COLS = 8;
-const ROWS = 8;
-const BOARD = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+
+const WIDTH = 600;
+const HEIGHT = 600;
+
+const boardWidth = 400;
+const boardHeight = 400;
+const boardX = (WIDTH - boardWidth) / 2;
+const boardY = (HEIGHT - boardHeight) / 2;
 
 function setup() {
-  createCanvas(400, 400);
-  for (let j = 0; j  < 3; j++) {
-    for (let i = 0; i < cols; i++) {
-      if ( i % 2 !== j % 2) {
-        board[j][i] = 2;
-      }
-    }
-  }
-  for (let j = ROWS-3; j < ROWS; j++) {
-    for(let i = 0; i < cols; i++) {
-      if (i % 2 !== j % 2) {
-        board[j][i] = 1;
-      }
-    }
-  }
 }
   
 function draw() {
-  background(220);
-  for (let j = 0; j  < 3; j++) {
-    for (let i = 0; i < cols; i++) {
+  drawBoard();
+}
+
+
+function drawBoard() {
+  // Draw the board in the center of the canvas
+  fill(255, 255, 255);
+  rect(boardX, boardY, boardWidth, boardHeight);
+
+  // Draw the squares
+  for (let i = 0; i < 8; i++) {
+    let y = boardY + i * squareHeight;
+    for (let j = 0; j < 8; j++) {
+      let x = boardX + j * squareWidth;
+      if ((i + j) % 2 === 0) {
+        fill(245, 255, 245);
+      }
+      else {
+        fill(200, 210, 200);
+      }
+      rect(x, y, squareWidth, squareHeight);
     }
   }
 }
-
 // inspo https://codepen.io/Danchuk/pen/waGgqj 
 // https://www.youtube.com/watch?v=iJ_B_5W-pDA
 // https://editor.p5js.org/simontiger/sketches/WozAjsXVK
+// https://github.com/arturalkaim/damas?tab=readme-ov-file
 
 // api keys
 // https://aimlapi.com/best-ai-apis-for-free
 // https://ai.google.dev/gemini-api/docs/quickstart?lang=node
+
+// https://img.icons8.com/?size=160&id=vDhzIZXjB49y&format=png
+
