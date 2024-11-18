@@ -15,6 +15,7 @@
 - [Moving Character in Grid](character-grid)
 - [Platform](platformer)
 - [Fireworks OOP](fireworks)
+- [Walker OOP](walker)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
