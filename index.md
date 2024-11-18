@@ -14,6 +14,7 @@
 - [Game of Life](game-of-life)
 - [Moving Character in Grid](character-grid)
 - [Platform](platformer)
+- [Fireworks OOP](fireworks)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
