@@ -16,6 +16,7 @@
 - [Platform](platformer)
 - [Fireworks OOP](fireworks)
 - [Walker OOP](walker)
+- [Connected Nodes OOP](nodes)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
