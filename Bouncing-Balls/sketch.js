@@ -30,7 +30,7 @@ function draw() {
 
     // Show ball
     noStroke();
-    fill(theBall.red, theBall.green, theBall.blue,)
+    fill(theBall.red, theBall.green, theBall.blue,);
     image(img,theBall.x, theBall.y, img.width * 1, img.height * 1);
   }
 }
