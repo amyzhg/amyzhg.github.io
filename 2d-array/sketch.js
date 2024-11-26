@@ -5,7 +5,8 @@
 // Extra for Experts:
 // - Using AI API as an opponent no algorithm so every game is different
 
-// NOTE TO SELF LOOK AT ALL COMMENTS SOME COULD BE NOTE TO SELF
+// NOTE TO SELF LOOK AT ALL COMMENTS SOME COULD BE NOTE TO SELF fix breaking 
+// mayb e changte colours implament the ai center it fix bugs
 
 const WIDTH = 600;
 const HEIGHT = 600;
@@ -42,7 +43,7 @@ for (let i = 0; i < rows; i++) {
 }
 
 function setup() {
-  createCanvas(WIDTH, HEIGHT);
+  createCanvas(windowWidth, windowHeight);
   for (let j = 0; j < 3; j++) {
     for (let i = 0; i < cols; i++) {
       if (i % 2 !== j % 2) {
@@ -61,7 +62,6 @@ function setup() {
 }
  
 function draw() {
-  background(255);
   drawBoard();
   // some sort of draw pieces remind myself later
   drawPieces();
@@ -69,8 +69,8 @@ function draw() {
 
 function drawBoard() {
   // Draw the board in the center of the canvas
-
-  fill(255,255,255);
+  boardX = (width - boardWidth) / 2;
+  boardY = (height - boardHeight) / 2;
   rect(boardX, boardY, boardWidth, boardHeight);
   // Draw the squares
   for (let i = 0; i < rows; i++) {
@@ -100,6 +100,10 @@ function drawPieces() {
       }
       if (i === selectedI && j === selectedJ) {
         stroke(255, 255, 0);
+        strokeWeight(3);
+      }
+      else {
+        noStroke();
       }
       circle(boardX + i * squareWidth + squareWidth / 2, boardY + j * squareHeight + squareHeight / 2, dw);
     }
