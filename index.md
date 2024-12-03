@@ -18,6 +18,8 @@
 - [Walker OOP](walker)
 - [Connected Nodes OOP](nodes)
 - [Collide 2D Library](collide)
+- [LocalStorage Demo](local-storage)
+- [Inheritance OOP](inheritance)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
